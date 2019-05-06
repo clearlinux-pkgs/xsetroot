@@ -6,16 +6,16 @@
 #
 Name     : xsetroot
 Version  : 1.1.2
-Release  : 1
+Release  : 2
 URL      : https://www.x.org/releases/individual/app/xsetroot-1.1.2.tar.gz
 Source0  : https://www.x.org/releases/individual/app/xsetroot-1.1.2.tar.gz
 Source99 : https://www.x.org/releases/individual/app/xsetroot-1.1.2.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT-Opengroup
-Requires: xsetroot-bin
-Requires: xsetroot-license
-Requires: xsetroot-man
+Requires: xsetroot-bin = %{version}-%{release}
+Requires: xsetroot-license = %{version}-%{release}
+Requires: xsetroot-man = %{version}-%{release}
 BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(xbitmaps)
 BuildRequires : pkgconfig(xcursor)
@@ -31,8 +31,7 @@ Xorg mailing list:
 %package bin
 Summary: bin components for the xsetroot package.
 Group: Binaries
-Requires: xsetroot-license
-Requires: xsetroot-man
+Requires: xsetroot-license = %{version}-%{release}
 
 %description bin
 bin components for the xsetroot package.
@@ -62,7 +61,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535772842
+export SOURCE_DATE_EPOCH=1557106811
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -74,10 +80,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1535772842
+export SOURCE_DATE_EPOCH=1557106811
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/xsetroot
-cp COPYING %{buildroot}/usr/share/doc/xsetroot/COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/xsetroot
+cp COPYING %{buildroot}/usr/share/package-licenses/xsetroot/COPYING
 %make_install
 
 %files
@@ -88,9 +94,9 @@ cp COPYING %{buildroot}/usr/share/doc/xsetroot/COPYING
 /usr/bin/xsetroot
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/xsetroot/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/xsetroot/COPYING
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man1/xsetroot.1
