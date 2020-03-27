@@ -6,7 +6,7 @@
 #
 Name     : xsetroot
 Version  : 1.1.2
-Release  : 2
+Release  : 3
 URL      : https://www.x.org/releases/individual/app/xsetroot-1.1.2.tar.gz
 Source0  : https://www.x.org/releases/individual/app/xsetroot-1.1.2.tar.gz
 Source99 : https://www.x.org/releases/individual/app/xsetroot-1.1.2.tar.gz.sig
