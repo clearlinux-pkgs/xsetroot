@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xCFDF148828C642A7 (alanc@freedesktop.org)
 #
 Name     : xsetroot
-Version  : 1.1.2
-Release  : 4
-URL      : https://www.x.org/releases/individual/app/xsetroot-1.1.2.tar.gz
-Source0  : https://www.x.org/releases/individual/app/xsetroot-1.1.2.tar.gz
-Source1  : https://www.x.org/releases/individual/app/xsetroot-1.1.2.tar.gz.sig
+Version  : 1.1.3
+Release  : 5
+URL      : https://www.x.org/releases/individual/app/xsetroot-1.1.3.tar.gz
+Source0  : https://www.x.org/releases/individual/app/xsetroot-1.1.3.tar.gz
+Source1  : https://www.x.org/releases/individual/app/xsetroot-1.1.3.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT-Opengroup
@@ -25,8 +25,7 @@ BuildRequires : pkgconfig(xproto)
 
 %description
 xsetroot - root window parameter setting utility for X
-All questions regarding this software should be directed at the
-Xorg mailing list:
+------------------------------------------------------
 
 %package bin
 Summary: bin components for the xsetroot package.
@@ -54,23 +53,23 @@ man components for the xsetroot package.
 
 
 %prep
-%setup -q -n xsetroot-1.1.2
-cd %{_builddir}/xsetroot-1.1.2
+%setup -q -n xsetroot-1.1.3
+cd %{_builddir}/xsetroot-1.1.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604542096
+export SOURCE_DATE_EPOCH=1667013005
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -82,10 +81,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1604542096
+export SOURCE_DATE_EPOCH=1667013005
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xsetroot
-cp %{_builddir}/xsetroot-1.1.2/COPYING %{buildroot}/usr/share/package-licenses/xsetroot/6c7fef6cf996bb3282859b5cfdddd0adf8f17f61
+cp %{_builddir}/xsetroot-%{version}/COPYING %{buildroot}/usr/share/package-licenses/xsetroot/6c7fef6cf996bb3282859b5cfdddd0adf8f17f61
 %make_install
 
 %files
